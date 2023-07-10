@@ -1,5 +1,4 @@
 #!/bin/sh
-export
 _term() {
   echo "Caught SIGTERM signal!"
   kill -TERM "$child" 2>/dev/null
