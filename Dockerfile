@@ -51,6 +51,6 @@ ENV tls_key_path ""
 EXPOSE 25/tcp
 EXPOSE 587/tcp
 
-VOLUME [/var/spool/postfix, /data]
+VOLUME ["/var/spool/postfix", "/data"]
 COPY entrypoint.sh /entrypoint.sh
 CMD ["/entrypoint.sh"]
