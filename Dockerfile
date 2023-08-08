@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM alpine:3.18.2
+FROM alpine:3.18.3
 
 RUN --mount=type=cache,target=/var/cache/apk apk --update add postfix=3.8.1-r0 cyrus-sasl=2.1.28-r4 cyrus-sasl-digestmd5=2.1.28-r4 cyrus-sasl-login=2.1.28-r4 tzdata busybox-extras
 
