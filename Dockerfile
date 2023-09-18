@@ -2,7 +2,12 @@
 
 FROM alpine:3.18.3
 
-RUN --mount=type=cache,target=/var/cache/apk apk --update add postfix=3.8.1-r0 cyrus-sasl=2.1.28-r4 cyrus-sasl-digestmd5=2.1.28-r4 cyrus-sasl-login=2.1.28-r4 tzdata busybox-extras
+# renovate: datasource=repology depName=alpine_3_18/postfix versioning=loose
+ENV POSTFIX_VERSION="3.8.1-r0"
+
+RUN --mount=type=cache,target=/var/cache/apk apk --update add cyrus-sasl=2.1.28-r4 cyrus-sasl-digestmd5=2.1.28-r4 cyrus-sasl-login=2.1.28-r4 tzdata busybox-extras
+RUN --mount=type=cache,target=/var/cache/apk apk --update add postfix=${POSTFIX_VERSION}
+
 
 RUN echo "maillog_file = /dev/stdout" >> /etc/postfix/main.cf
 
@@ -29,10 +34,10 @@ RUN postconf -e 'inet_interfaces = all' \
     && postconf -e 'smtpd_tls_session_cache_database = lmdb:$data_directory/smtpd_tls_session_cache'
 
 RUN mkdir /etc/sasl2 && echo 'pwcheck_method: auxprop' >/etc/sasl2/smtpd.conf \
-                         && echo 'auxprop_plugin: sasldb' >>/etc/sasl2/smtpd.conf \
-                         && echo 'mech_list: LOGIN DIGEST-MD5' >>/etc/sasl2/smtpd.conf \
-                         && echo 'sasldb_path: /data/sasldb2' >>/etc/sasl2/smtpd.conf \
-                         && echo 'log_level: 2' >>/etc/sasl2/smtpd.conf
+    && echo 'auxprop_plugin: sasldb' >>/etc/sasl2/smtpd.conf \
+    && echo 'mech_list: LOGIN DIGEST-MD5' >>/etc/sasl2/smtpd.conf \
+    && echo 'sasldb_path: /data/sasldb2' >>/etc/sasl2/smtpd.conf \
+    && echo 'log_level: 2' >>/etc/sasl2/smtpd.conf
 
 
 RUN postalias /etc/postfix/aliases
