@@ -31,7 +31,8 @@ RUN postconf -e 'inet_interfaces = all' \
     && postconf -e 'smtpd_tls_received_header = yes' \
     && postconf -e 'smtpd_tls_session_cache_timeout = 3600s' \
     && postconf -e 'smtpd_sasl_tls_security_options=noanonymous' \
-    && postconf -e 'smtpd_tls_session_cache_database = lmdb:$data_directory/smtpd_tls_session_cache'
+    && postconf -e 'smtpd_tls_session_cache_database = lmdb:$data_directory/smtpd_tls_session_cache' \
+    && postconf -e 'header_checks = pcre:/etc/postfix/header_checks'
 
 RUN mkdir /etc/sasl2 && echo 'pwcheck_method: auxprop' >/etc/sasl2/smtpd.conf \
     && echo 'auxprop_plugin: sasldb' >>/etc/sasl2/smtpd.conf \
