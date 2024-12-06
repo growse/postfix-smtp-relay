@@ -3,7 +3,7 @@
 FROM alpine:3.20.3
 
 # renovate: datasource=repology depName=alpine_3_20/postfix versioning=loose
-ARG POSTFIX_VERSION=3.9.0-r1
+ARG POSTFIX_VERSION=3.9.1-r0
 # renovate: datasource=repology depName=alpine_3_20/cyrus-sasl versioning=loose
 ARG CYRUS_VERSION=2.1.28-r6
 
