@@ -1,11 +1,11 @@
 # syntax=docker/dockerfile:1
 
-FROM alpine:3.20.3
+FROM alpine:3.22.1
 
-# renovate: datasource=repology depName=alpine_3_20/postfix versioning=loose
-ARG POSTFIX_VERSION=3.9.3-r0
-# renovate: datasource=repology depName=alpine_3_20/cyrus-sasl versioning=loose
-ARG CYRUS_VERSION=2.1.28-r6
+# renovate: datasource=repology depName=alpine_3_22/postfix versioning=loose
+ARG POSTFIX_VERSION=3.10.3-r0
+# renovate: datasource=repology depName=alpine_3_22/cyrus-sasl versioning=loose
+ARG CYRUS_VERSION=2.1.28-r8
 
 RUN --mount=type=cache,target=/var/cache/apk apk --update add cyrus-sasl=${CYRUS_VERSION} cyrus-sasl-digestmd5=${CYRUS_VERSION} cyrus-sasl-login=${CYRUS_VERSION} tzdata busybox-extras
 RUN --mount=type=cache,target=/var/cache/apk apk --update add postfix=${POSTFIX_VERSION} postfix-pcre=${POSTFIX_VERSION}
