@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM alpine:3.22.2
+FROM alpine:3.24.1
 
 # renovate: datasource=repology depName=alpine_3_22/postfix versioning=loose
 ARG POSTFIX_VERSION=3.10.11-r0
